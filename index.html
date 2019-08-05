@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Final Test</title>
+    <script type="text/javascript">
+        // var positions = ["Junior QA engineer", "Middle QA engineer", "Product owner", "Senior QA engineer", "Middle developer", "Project manager", "Senior developer", "Junior developer"];
+        var positions = ["Project manager", "Senior developer", "Junior developer"];
+        var team = new Object();
+        team.employees = new Array();
+        team.showTeam = function() {
+           for(var i = 0; i < this.employees.length; i++) {
+               console.log(this.employees[i].name + " - " + this.employees[i].position + ". Salary - " + this.employees[i].salary + "$.");
+           }  
+        }
+    
+        function addEmployees(){
+          for(var i = 0; i < positions.length; i++){
+            var employeeName = prompt("Enter name for " + positions[i]);
+            var employee = new Object();
+            employee.name = employeeName;
+            employee.position = positions[i];
+    
+            employee.tellAboutYourSelf = function () {
+                return "My name is " + "<b>" +this.name+ "</b>" + ", and I'm working on - " + this.position + " position. My salary is: " + this.salary + "$.";
+            }
+    
+            team.employees.push(employee);
+          }
+        }
+    
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min; 
+        }
+            
+        
+        function addSalaryForEachPerson(){
+            for (var i = 0; i < team.employees.length; i++) {
+                var position = team.employees[i].position;
+                var salary = 0;
+                if (position.indexOf('Junior') > -1){
+                    salary = getRandomInt(500, 1000);
+                } else if (position.indexOf('Middle') > -1){
+                    salary = getRandomInt(1500, 2000);
+                } else if (position.indexOf('Senior') > -1){
+                    salary = getRandomInt(2500, 3000);
+                } else {
+                    salary = getRandomInt(4000, 4500);
+                }
+                team.employees[i].salary = salary;
+            }
+        }
+    
+        addEmployees();
+        addSalaryForEachPerson();
+        team.showTeam();
+    
+        document.write("Team: <br/>***************************<br/>")
+        for (var i = 0; i < team.employees.length; i++){
+            document.write(team.employees[i].tellAboutYourSelf() + "<br/>");
+        }
+
+
+
+
+        
+      </script>
+</head>
+<body>
+
+
+</body>
+</html>
+
+
+
+
+
+
+<!-- # finalTest
+
+1. Принять от пользователя имена людей для набора в команду. Имена принять и сохранить в массиве. Количество имён должно соответсвовать количеству должностей.
+
+
+
+2. Создать объект team в котором будут храниться новые объекты-сотрудники с параметрами name и position, данные для этих свойств добавляем из массивов.
+
+
+
+3. Добавить сотрудникам зарплаты (свойство salary) при помощи метода Math.random(), который будет выдавать произвольное число в промежутке между N1 и N2 исходя из принципа:
+   - если в должности есть слово "junior" сумма будет от 500 до 1000;
+   - если в должности есть слово "middle" сумма будет от 1500 до "2000;
+   - если в должности есть слово "senior" сумма будет от 2500 до 3000;
+   - для всех остальных - от 4000 до 4500;
+   
+4. Добавить каждому сотруднику метод tellAboutYourSelf(), который будет сообщать информацию о пользователе (например "Меня зовут John и я - Project manager. Я зарабатываю 4863$.").
+5. Добавить объекту team метод showTeam(), который будет выводить информацию о всех сотрудниках в консоль в виде таблицы в формате: "John - Project manager. Зарплата - 4863$."*
+
+Для удобства создайте по порядку все необходимые функции и в конце сделать вызов этих функций в логическом порядке. Например:
+   - getNames();
+   - createTeam();
+   - setSalary();
+   - создание цикла для установки метода tellAboutYourSelf();
+   - *создание team.showTeam() = function() {...};
+   - *вызов мтеода showTeam(); -->
